@@ -14,7 +14,9 @@ class DashboardScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () async {
-              await authService.logOut(); // Perform logout logic
+              await authService.logOut(); // Call logout method
+              Navigator.of(context)
+                  .pop(); // Example: Navigate back after logout
             },
           ),
         ],
