@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:inventory_management_system/Screens/login_screen.dart'; // Replace with actual path if needed
+import 'package:inventory_management_system/Screens/login_screen.dart';
+import 'package:inventory_management_system/widgets/button.dart';
+import 'package:inventory_management_system/widgets/inputField.dart'; // Replace with actual path if needed
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -159,141 +161,160 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.3,
-              color: Colors.red[500],
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.1,
-                ),
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(fontSize: 32, color: Colors.white),
-                    ),
-                    Text(
-                      'Welcome to Inventory Management System',
-                      style: TextStyle(fontSize: 18, color: Colors.white70),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _nameController,
-                    decoration: const InputDecoration(hintText: 'Enter name'),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(hintText: 'Enter email'),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(hintText: 'Password'),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _confirmPasswordController,
-                    obscureText: true,
-                    decoration:
-                        const InputDecoration(hintText: 'Confirm password'),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _registerUser,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 60),
-                      backgroundColor: Colors.red[500],
-                    ),
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(color: Colors.white, fontSize: 24),
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-                  const Center(
-                    child: Text(
-                      "Continue with social media",
-                      style: TextStyle(color: Colors.grey, fontSize: 16),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue[500],
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 18, vertical: 10),
-                          child: Text(
-                            "Facebook",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red[500],
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 18, vertical: 10),
-                          child: Text(
-                            "Google",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Already have an account?"),
-                      const SizedBox(width: 10),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to the login screen
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
-                          );
-                        },
-                        child: Text(
-                          "Login",
+            Stack(
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 1,
+                  color: Colors.red[500],
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.05,
+                        top: MediaQuery.of(context).size.height * 0.1),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Sign Up'.toUpperCase(),
                           style: TextStyle(
-                            color: Colors.red[500],
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontSize: 32,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
                         ),
+                        Text(
+                          'Welcome to Inventory Management System',
+                          style: TextStyle(fontSize: 18, color: Colors.white70),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(30.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30)),
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.3),
+                  child: Column(
+                    children: [
+                      InputField(
+                        controller: _nameController,
+                        decoration:
+                            const InputDecoration(hintText: 'Enter name'),
+                        icon: Icon(Icons.person),
+                      ),
+                      const SizedBox(height: 20),
+                      InputField(
+                        controller: _emailController,
+                        decoration: InputDecoration(hintText: 'Enter email'),
+                        keyboardtype: TextInputType.emailAddress,
+                        icon: Icon(Icons.email),
+                      ),
+                      const SizedBox(height: 20),
+                      InputField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(hintText: 'Password'),
+                        secureText: true,
+                        icon: Icon(Icons.password),
+                      ),
+                      const SizedBox(height: 20),
+                      InputField(
+                        controller: _confirmPasswordController,
+                        decoration:
+                            InputDecoration(hintText: 'Confirm password'),
+                        secureText: true,
+                        icon: Icon(Icons.password),
+                      ),
+                      const SizedBox(height: 20),
+                      Button(
+                        btnText: "Sign Up".toUpperCase(),
+                        icon: Icon(Icons.lock, color: Colors.white),
+                        bgColor: Colors.red[500],
+                        callback: () => _registerUser,
+                        textStyle: TextStyle(color: Colors.white, fontSize: 20),
+                        width: 160,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                      ),
+                      const SizedBox(height: 20),
+                      const Center(
+                        child: Text(
+                          "Continue with social media",
+                          style: TextStyle(color: Colors.grey, fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Button(
+                            btnText: "Facebook",
+                            icon: Icon(
+                              Icons.facebook_outlined,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                            bgColor: Colors.blue[500],
+                            // callback: () => _loginUser(context),
+                            textStyle:
+                                TextStyle(color: Colors.white, fontSize: 18),
+                            width: MediaQuery.of(context).size.width * 0.42,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                          ),
+                          Button(
+                            btnText: "Google",
+                            icon: Icon(
+                              Icons.g_mobiledata,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            bgColor: Colors.red[500],
+                            // callback: () => _loginUser(context),
+                            textStyle:
+                                TextStyle(color: Colors.white, fontSize: 18),
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 0),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Already have an account?"),
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () {
+                              // Navigate to the login screen
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()),
+                              );
+                            },
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Colors.red[500],
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
