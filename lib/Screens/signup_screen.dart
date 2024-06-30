@@ -105,8 +105,7 @@ class _SignupScreenState extends State<SignupScreen> {
       } else if (response.statusCode == 422) {
         var responseBody = json.decode(response.body);
         print('Registration failed with validation errors:');
-        print(responseBody); // Print response body for debugging
-        // Optionally display error messages to the user
+        print(responseBody);
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -237,7 +236,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         btnText: "Sign Up".toUpperCase(),
                         icon: Icon(Icons.lock, color: Colors.white),
                         bgColor: Colors.red[500],
-                        callback: () => _registerUser,
+                        callback: () => _registerUser(),
                         textStyle: TextStyle(color: Colors.white, fontSize: 20),
                         width: 160,
                         padding:
